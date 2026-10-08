@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/optimize.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{.next,node_modules,data,docs,scripts,supabase,prisma,public,app,components,lib,optimizer/tests}/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/optimize/:path*", "destination": "/api/optimize" }
+  ]
+}

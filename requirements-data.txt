@@ -1,0 +1,9 @@
+# Offline data preparation (scripts/data, notebooks). Not needed by the app or Vercel.
+requests>=2.32,<3
+truststore>=0.10,<1
+pandas>=2.2,<3
+openpyxl>=3.1,<4
+rapidfuzz>=3.9,<4
+# Travel-time comparison notebook (scripts/notebooks)
+jupyter>=1.1,<2
+folium>=0.18,<1

@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Environment variables (secrets) — only .env.example is committed
+.env
+.env*.local
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Raw downloads for the village data pipeline (large, re-downloadable)
+data/raw/
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db

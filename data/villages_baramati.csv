@@ -1,0 +1,118 @@
+name,lat,lng,census_code,population,match_score,coord_source
+Ambi Bk,18.287557,74.277863,556876,1184,,census_boundary
+Ambi Kh,18.318109,74.286478,556875,1091,,census_boundary
+Anjangaon,18.223447,74.502432,556912,1755,,census_boundary
+Baburdi,18.27452,74.377898,556883,1889,100.0,osm
+Bajrangwadi,18.089409,74.399104,556960,879,,census_boundary
+Baramati Rural,18.147933,74.556202,556975,19387,,census_boundary
+Barhanpur,18.212204,74.534845,556902,1722,,census_boundary
+Bhilarwadi,18.204471,74.452086,556914,1180,,census_boundary
+Bhondvewadi,18.322212,74.335242,556874,1757,,census_boundary
+Chandgude Wadi,18.304147,74.306019,556879,981,,census_boundary
+Chaudhar Wadi,18.175817,74.260723,556924,922,,census_boundary
+Chopadaj,18.15584,74.337235,556927,2491,,census_boundary
+Dandwadi,18.346603,74.412807,556868,1958,,census_boundary
+Deulgaon Rasal,18.287917,74.465424,556885,2711,,census_boundary
+Deulwadi,18.154337,74.265884,556935,829,,census_boundary
+Dhakale,18.17373,74.443172,556915,1554,,census_boundary
+Dhekalwadi,18.105344,74.661148,556979,3826,,census_boundary
+Dhumalwadi,18.100322,74.472049,556954,2659,,census_boundary
+Dorlewadi,18.101866,74.605032,556977,6666,,census_boundary
+Gadadarwadi,18.13719,74.24791,556938,1384,,census_boundary
+Gadikhelwadi,18.277815,74.598166,556892,1159,,census_boundary
+Ghadagewadi,18.060923,74.587865,556982,1539,,census_boundary
+Gojubavi,18.237891,74.573547,556898,2108,,census_boundary
+Gunwadi,18.123033,74.593041,556974,8420,,census_boundary
+Hol,18.10535,74.328603,556932,3302,,census_boundary
+Jainakwadi,18.234399,74.647092,556900,1279,,census_boundary
+Jalakewadi Mudhale,18.196154,74.42367,556918,675,,census_boundary
+Jalgaon Kade Pathar,18.224349,74.452858,556911,1264,,census_boundary
+Jalgaon Supe,18.236401,74.461192,556886,2859,100.0,osm
+Jaradwadi,18.271341,74.545964,556893,1666,,census_boundary
+Jogwadi,18.250582,74.266179,556877,1464,,census_boundary
+Kalkhairewadi,18.298979,74.356156,556881,1738,,census_boundary
+Kamagalwadi,18.148467,74.426452,556916,1184,,census_boundary
+Kambleshwar,18.067324,74.455424,556963,3736,,census_boundary
+Kanadwadi,18.178095,74.333661,556926,706,,census_boundary
+Kanheri,18.149636,74.642875,556971,1578,,census_boundary
+Karanje,18.133493,74.275929,556936,1416,,census_boundary
+Karanjepul,18.126557,74.291102,556941,3273,,census_boundary
+Karhati,18.275289,74.42691,556884,3333,,census_boundary
+Karhavagaj,18.189994,74.488491,556913,3368,,census_boundary
+Karkhel,18.291674,74.497929,556895,2590,100.0,osm
+Katewadi,18.137088,74.663301,556972,6981,,census_boundary
+Katphal,18.237602,74.616945,556899,2540,,census_boundary
+Khadukhairewadi,18.302154,74.323616,556880,712,,census_boundary
+Khandaj,18.079529,74.529638,556966,5793,,census_boundary
+Khandobachiwadi,18.119941,74.253592,556937,1429,,census_boundary
+Kharade Wadi,18.314527,74.507674,556887,1104,,census_boundary
+Kololi,18.318336,74.450426,556870,1083,,census_boundary
+Korhale Bk,18.130788,74.396664,556929,5625,,census_boundary
+Korhale Kh,18.090744,74.375179,556946,3086,,census_boundary
+Kurnewadi,18.116336,74.426081,556956,1445,,census_boundary
+Kutwalwadi,18.341624,74.334128,556873,2000,,census_boundary
+Late,18.073071,74.407152,556961,1050,100.0,osm
+Loni Bhapkar,18.225865,74.377013,556908,3964,,census_boundary
+Magarwadi,18.15524,74.292301,556934,1149,,census_boundary
+Malad (baramati),18.117513,74.562619,556976,5628,,census_boundary
+Malegaon Bk,18.133191,74.510603,556949,18470,100.0,osm
+Malegaon Kh.,18.151495,74.515187,556948,2432,,census_boundary
+Malshikare Wadi,18.102134,74.390318,556931,797,,census_boundary
+Malwadi,18.246252,74.413792,556910,1193,,census_boundary
+Malwadi,18.088678,74.417233,556959,1231,,census_boundary
+Manappawasti,18.10537,74.442961,556955,3716,,census_boundary
+Masalwadi,18.224178,74.343015,556920,1296,,census_boundary
+Medad,18.179053,74.542703,556904,3773,,census_boundary
+Mekhali,18.066668,74.609723,556981,3765,,census_boundary
+Modhave,18.209011,74.277517,556922,2231,100.0,osm
+Moralwadi,18.196702,74.313756,556921,1065,,census_boundary
+Morgaon,18.277135,74.316747,556878,5321,100.0,osm
+Mudhale,18.174479,74.388143,556917,4383,,census_boundary
+Murti,18.223399,74.288513,556906,3355,,census_boundary
+Murum,18.085971,74.309096,556944,5744,,census_boundary
+Naroli,18.326686,74.432636,556869,1288,,census_boundary
+Nepat Valan,18.18661,74.518151,556903,303,,census_boundary
+Nimbodi,18.292549,74.69136,556891,2437,,census_boundary
+Nimbut,18.110697,74.237404,556939,6052,,census_boundary
+Nirvagaj,18.082329,74.566115,556967,7241,,census_boundary
+Palshiwadi,18.199939,74.341675,556919,2038,,census_boundary
+Pandare,18.139375,74.462164,556952,7440,100.0,osm
+Pandharwadi,18.070985,74.437306,556962,541,,census_boundary
+Pansarewadi,18.308428,74.399022,556871,1708,,census_boundary
+Parwadi,18.281437,74.65152,556890,5477,100.0,osm
+Pawaimal,18.117244,74.460735,556953,1912,100.0,osm
+Pawnewadi,18.108098,74.529536,556950,2951,,census_boundary
+Pimpalewasti,18.080475,74.431465,556958,1137,,census_boundary
+Pimpali,18.128576,74.626334,556973,4603,,census_boundary
+Rui,18.183121,74.615627,556970,6975,,census_boundary
+Sabalewadi,18.309243,74.54999,556889,1663,,census_boundary
+Sadobachiwadi,18.113536,74.346592,556945,2208,,census_boundary
+Sangavi,18.060345,74.485592,556964,7331,100.0,osm
+Sastewadi,18.132182,74.324802,556933,2468,,census_boundary
+Sawal,18.192322,74.642183,556969,2020,,census_boundary
+Sawantwadi,18.213904,74.568272,556901,647,,census_boundary
+Sayambachiwadi,18.213489,74.410544,556909,1311,,census_boundary
+Sharadanagar,18.13222,74.536463,,,,osm
+Sherechiwadi,18.283721,74.361887,556882,1091,95.7,osm
+Shirawali,18.078493,74.501108,556965,3827,,census_boundary
+Shirsuphal,18.323763,74.592572,556888,5512,,census_boundary
+Sirshane,18.08596,74.442473,556957,533,,census_boundary
+Songaon,18.074059,74.649461,556980,4515,,census_boundary
+Sonkaswadi,18.158531,74.471196,556947,2233,,census_boundary
+Sonvadisupe,18.259303,74.506758,556896,1624,,census_boundary
+Soratewadi,18.117693,74.30198,556940,1662,,census_boundary
+Supe,18.335009,74.377617,556872,5008,100.0,osm
+Tandulwadi,18.192914,74.587394,556905,9159,,census_boundary
+Tardoli,18.248195,74.339448,556907,2469,,census_boundary
+Thopatewadi,18.105443,74.410627,556930,1969,,census_boundary
+Umbarwadi,18.201571,74.291507,556923,736,100.0,osm
+Undavadi Kade Pathar,18.247176,74.544714,556897,2298,,census_boundary
+Undavadisupe,18.289711,74.52342,556894,1536,,census_boundary
+Vadgaon Nimbalkar,18.139444,74.363121,556928,7646,,census_boundary
+Vadhane,18.3692,74.341137,556867,1893,,census_boundary
+Vanjarwadi,18.202193,74.617798,556968,2451,,census_boundary
+Waghalwadi,18.107974,74.273676,556942,5391,,census_boundary
+Waki,18.160107,74.315616,556925,1761,,census_boundary
+Wanewadi,18.090902,74.280818,556943,5932,,census_boundary
+Yelewasti,18.117842,74.492752,556951,2814,,census_boundary
+Zaragadwadi,18.091426,74.628684,556978,6185,,census_boundary

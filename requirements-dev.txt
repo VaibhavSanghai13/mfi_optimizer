@@ -1,0 +1,6 @@
+# Local development only: runtime deps + local server + tests.
+-r requirements.txt
+uvicorn>=0.30,<1
+python-dotenv>=1.0,<2  # lets uvicorn read .env (JWT_SECRET)
+pytest>=8,<9
+httpx>=0.27,<1

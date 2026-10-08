@@ -1,0 +1,5 @@
+# Runtime dependencies of the Python function (installed by Vercel).
+fastapi>=0.115,<1
+ortools>=9.15,<9.16  # tested version; bigger releases may not fit Vercel's function size limit
+pydantic>=2.7,<3
+pyjwt>=2.9,<3
