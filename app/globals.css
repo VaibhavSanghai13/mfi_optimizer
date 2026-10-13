@@ -161,3 +161,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*
+ * Printing a report ("Print / PDF" on the Reports page). The app chrome is for
+ * navigating, not for the printed sheet, so the sidebar, header and any control
+ * marked `print:hidden` are dropped and the content runs full width.
+ */
+@media print {
+  aside:has(nav),
+  header:has(button[aria-label='Open menu']) {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  body {
+    background: white;
+  }
+  /* Keep a panel, table row or chart from being split across two pages. */
+  section,
+  tr {
+    break-inside: avoid;
+  }
+}

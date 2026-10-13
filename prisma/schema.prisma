@@ -106,6 +106,8 @@ model Branch {
   groups   JlgGroup[]
   plans    Plan[]
 
+  allowanceApprovals AllowanceApproval[]
+
   @@map("branches")
 }
 
@@ -130,6 +132,8 @@ model Officer {
   assignedGroups JlgGroup[]
   planRoutes     PlanRoute[]
 
+  allowanceApprovals AllowanceApproval[]
+
   @@map("officers")
 }
 
@@ -150,6 +154,8 @@ model User {
   createdGroups JlgGroup[]
   createdPlans  Plan[]
 
+  approvedAllowances AllowanceApproval[]
+
   @@map("users")
 }
 
@@ -166,6 +172,8 @@ model Settings {
   /// Multiplies OSRM car travel times to approximate a two-wheeler.
   speedFactor               Float   @default(1.0) @map("speed_factor")
   bufferMin                 Int     @default(5) @map("buffer_min")
+  /// Rupees per planned road kilometre, used for travel-allowance reports.
+  travelAllowancePerKm      Float   @default(4.0) @map("travel_allowance_per_km")
   // Optimization
   penaltyHigh               Int     @default(1000) @map("penalty_high")
   penaltyMedium             Int     @default(300) @map("penalty_medium")
@@ -320,4 +328,26 @@ model TravelCache {
 
   @@id([origin, destination])
   @@map("travel_cache")
+}
+
+// ──────────────────── Travel allowance approvals ────────────────────
+
+/// A branch manager signing off one officer's travel-allowance statement for one
+/// week. The amounts themselves are always recomputed from the saved plans, so a
+/// row here records only *that* the week was approved, and by whom.
+model AllowanceApproval {
+  officerId  String   @map("officer_id") @db.Uuid
+  /// Monday of the week the statement covers.
+  weekStart  DateTime @map("week_start") @db.Date
+  branchId   String   @map("branch_id") @db.Uuid
+  approvedAt DateTime @default(now()) @map("approved_at") @db.Timestamptz(6)
+  approvedBy String   @map("approved_by") @db.Uuid
+
+  officer  Officer @relation(fields: [officerId], references: [id], onDelete: Cascade)
+  branch   Branch  @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  approver User    @relation(fields: [approvedBy], references: [id])
+
+  @@id([officerId, weekStart])
+  @@index([branchId, weekStart])
+  @@map("allowance_approvals")
 }

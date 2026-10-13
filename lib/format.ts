@@ -38,6 +38,9 @@ export function fmtDuration(min: number) {
 
 export const fmtKm = (km: number) => `${km.toFixed(1)} km`
 
+/** 4236 -> "₹4,236" (Indian digit grouping). */
+export const fmtRupees = (amount: number) => `₹${Math.round(amount).toLocaleString('en-IN')}`
+
 const weekdays: (Weekday | null)[] = [null, 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 /** Meeting day for an ISO date; Sunday has no meetings. */
 export const weekdayOf = (iso: string) => weekdays[new Date(`${iso.slice(0, 10)}T00:00:00`).getDay()] ?? null

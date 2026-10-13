@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { cookies } from 'next/headers'
 import './globals.css'
+import { isLang, LANG_COOKIE } from '@/lib/i18n/config'
 import Providers from './providers'
 
 export const metadata: Metadata = {
@@ -33,15 +35,18 @@ export const viewport: Viewport = {
   ],
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Read on the server so the first paint is already in the chosen language.
+  const saved = (await cookies()).get(LANG_COOKIE)?.value
+  const lang = isLang(saved) ? saved : 'en'
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body className="antialiased">
-        <Providers>{children}</Providers>
+        <Providers lang={lang}>{children}</Providers>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { priorityLabel, reasonLabel } from '@/lib/format'
+import { useT } from '@/lib/i18n'
 import type { PlanStatus, Priority, PriorityReason } from '@/lib/types'
 
 export const inputClass = 'h-9 w-full rounded-md border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
@@ -19,10 +20,10 @@ export type Tone = keyof typeof tones
 export function Badge({ children, tone = 'default' }: { children: React.ReactNode; tone?: Tone }) {
   return <span className={`inline-flex items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-medium ${tones[tone]}`}>{children}</span>
 }
-export const PriorityBadge = ({ priority }: { priority: Priority }) => <Badge tone={priority}>{priorityLabel[priority]}</Badge>
-export const ReasonChip = ({ reason }: { reason: PriorityReason }) => <span className="inline-flex whitespace-nowrap rounded border px-1.5 py-0.5 text-[10px] text-muted-foreground">{reasonLabel[reason]}</span>
+export const PriorityBadge = ({ priority }: { priority: Priority }) => <Badge tone={priority}>{useT()(priorityLabel[priority])}</Badge>
+export const ReasonChip = ({ reason }: { reason: PriorityReason }) => <span className="inline-flex whitespace-nowrap rounded border px-1.5 py-0.5 text-[10px] text-muted-foreground">{useT()(reasonLabel[reason])}</span>
 const statusTone: Record<PlanStatus, Tone> = { optimal: 'success', feasible: 'info', partial: 'medium', infeasible: 'high' }
-export const StatusBadge = ({ status }: { status: PlanStatus }) => <Badge tone={statusTone[status]}><span className="capitalize">{status}</span></Badge>
+export const StatusBadge = ({ status }: { status: PlanStatus }) => <Badge tone={statusTone[status]}><span className="capitalize">{useT()(status)}</span></Badge>
 
 export function PageHeader({ eyebrow, title, description, actions }: { eyebrow: string; title: string; description?: string; actions?: React.ReactNode }) {
   return <header className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{eyebrow}</p><h1 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h1>{description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}</div>{actions && <div className="flex flex-wrap gap-2">{actions}</div>}</header>

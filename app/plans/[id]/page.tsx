@@ -12,30 +12,32 @@ import { buttonClass, PageHeader } from '@/components/ui-kit'
 import { getBranches, getGroups, getOfficers, getPlan } from '@/lib/api-client'
 import { useAuth } from '@/lib/auth'
 import { fmtDate, unassignedLabel } from '@/lib/format'
+import { useT } from '@/lib/i18n'
 import type { Branch, JLGGroup, Officer, Plan } from '@/lib/types'
 
 export default function PlanDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [plan, setPlan] = useState<Plan | null | undefined>(undefined); const [branch, setBranch] = useState<Branch | null>(null); const [groups, setGroups] = useState<JLGGroup[]>([]); const [officers, setOfficers] = useState<Officer[]>([]); const [hidden, setHidden] = useState<Set<string>>(new Set())
   const { user } = useAuth()
+  const t = useT()
   // getPlan throws on 404, which shows the "Plan not found" state.
   useEffect(() => { getPlan(id).then((p) => setPlan(p ?? null)).catch(() => setPlan(null)); getBranches().then((b) => setBranch(b.find((x) => x.id === user?.branchId) ?? b[0])); getGroups().then(setGroups); getOfficers().then(setOfficers) }, [id, user?.branchId])
   const exportCsv = () => {
     if (!plan) return
-    const rows = [['Officer', 'Stop', 'Group', 'Village', 'Arrival', 'Wait (min)', 'Meeting start', 'Meeting end', 'Travel (min)', 'Distance (km)']]
+    const rows = [[t('Officer'), t('Stop'), t('Group'), t('Village'), t('Arrival'), t('Wait (min)'), t('Meeting start'), t('Meeting end'), t('Travel (min)'), t('Distance (km)')]]
     for (const r of plan.routes) for (const s of r.stops) { const g = groups.find((x) => x.id === s.groupId); rows.push([officers.find((o) => o.id === r.officerId)?.name ?? '', String(s.sequence), g?.name ?? '', g?.village ?? '', s.arrivalTime, String(s.waitMin), s.meetingStart, s.meetingEnd, String(s.travelMinFromPrev), String(s.distanceKmFromPrev)]) }
-    for (const u of plan.unassigned) { const g = groups.find((x) => x.id === u.groupId); rows.push(['Not scheduled', '', g?.name ?? '', g?.village ?? '', '', '', '', '', '', unassignedLabel[u.reason]]) }
+    for (const u of plan.unassigned) { const g = groups.find((x) => x.id === u.groupId); rows.push([t('Not scheduled'), '', g?.name ?? '', g?.village ?? '', '', '', '', '', '', t(unassignedLabel[u.reason])]) }
     const csv = rows.map((r) => r.map((c) => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n')
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = `route-plan-${plan.date}.csv`; a.click(); URL.revokeObjectURL(a.href)
   }
   const toggle = (oid: string) => setHidden((h) => { const n = new Set(h); if (n.has(oid)) n.delete(oid); else n.add(oid); return n })
-  const map = planMapData(plan ?? null, groups, officers, hidden)
+  const map = planMapData(plan ?? null, groups, officers, hidden, groups, t)
   return <AppShell><div className="mx-auto max-w-7xl space-y-4">
-    {plan === undefined && <p className="p-8 text-center text-sm text-muted-foreground">Loading plan…</p>}
-    {plan === null && <div className="rounded-xl border bg-card p-10 text-center"><p className="font-medium">Plan not found</p><p className="mt-1 text-sm text-muted-foreground">It may belong to another branch, or the link is wrong.</p><Link href="/plans" className="mt-4 inline-block text-sm underline">Back to plans</Link></div>}
+    {plan === undefined && <p className="p-8 text-center text-sm text-muted-foreground">{t('Loading plan')}…</p>}
+    {plan === null && <div className="rounded-xl border bg-card p-10 text-center"><p className="font-medium">{t('Plan not found')}</p><p className="mt-1 text-sm text-muted-foreground">{t('It may belong to another branch, or the link is wrong.')}</p><Link href="/plans" className="mt-4 inline-block text-sm underline">{t('Back to plans')}</Link></div>}
     {plan && <>
-      <Link href="/plans" className="text-sm text-muted-foreground hover:text-foreground">← All plans</Link>
-      <PageHeader eyebrow="Plan detail" title={`Routes for ${fmtDate(plan.date)}`} description={`${branch?.name ?? ''} · ${plan.saved ? 'Saved plan' : 'Unsaved draft'}`} actions={<><button onClick={exportCsv} className={buttonClass.outline}><Download size={15} />Export CSV</button><button onClick={() => window.print()} className={buttonClass.outline}><Printer size={15} />Print</button></>} />
+      <Link href="/plans" className="text-sm text-muted-foreground hover:text-foreground">← {t('All plans')}</Link>
+      <PageHeader eyebrow={t('Plan detail')} title={t('Routes for {date}', { date: fmtDate(plan.date) })} description={`${branch?.name ?? ''} · ${t(plan.saved ? 'Saved plan' : 'Unsaved draft')}`} actions={<><button onClick={exportCsv} className={buttonClass.outline}><Download size={15} />{t('Export CSV')}</button><button onClick={() => window.print()} className={buttonClass.outline}><Printer size={15} />{t('Print')}</button></>} />
       {plan.status === 'infeasible' && <InfeasibleNotice />}
       <KpiStrip plan={plan} />
       <div className="relative h-[420px] overflow-hidden rounded-xl border bg-muted">{branch && groups.length > 0 && <RouteMap className="h-full w-full" branch={branch} points={map.points} routes={map.routes} fitKey={plan.id} />}<div className="absolute right-3 top-3 z-[500]"><Legend plan={plan} officers={officers} hidden={hidden} onToggle={toggle} /></div></div>

@@ -104,6 +104,7 @@ export const SettingsSchema = z
     osrmUrl: z.string().trim().regex(/^https?:\/\/\S+$/, 'OSRM URL must start with http:// or https://.'),
     speedFactor: z.number().min(0.5, 'Speed factor must be between 0.5 and 1.5.').max(1.5, 'Speed factor must be between 0.5 and 1.5.'),
     bufferMin: z.int().min(0).max(60),
+    travelAllowancePerKm: z.number().min(0, 'Travel allowance must be between ₹0 and ₹100 per km.').max(100, 'Travel allowance must be between ₹0 and ₹100 per km.'),
     penaltyHigh: z.int().min(0),
     penaltyMedium: z.int().min(0),
     penaltyLow: z.int().min(0),
@@ -112,6 +113,17 @@ export const SettingsSchema = z
     balanceWorkload: z.boolean(),
   })
   .refine((s) => s.defaultShiftEnd > s.defaultShiftStart, { path: ['defaultShiftEnd'], message: 'Shift end must be after shift start.' })
+
+/**
+ * A travel-allowance week is identified by its Monday, so two managers cannot
+ * create overlapping statements for the same days.
+ */
+export const WeekStartSchema = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, 'Week must be a YYYY-MM-DD date.')
+  .refine((iso) => new Date(`${iso}T00:00:00Z`).getUTCDay() === 1, 'Week must start on a Monday.')
+
+export const ApprovalSchema = z.object({ officerId: z.uuid('Choose an officer.'), weekStart: WeekStartSchema })
 
 /** The first validation message, for a simple `{ error }` response. */
 export const firstError = (error: z.ZodError) => error.issues[0]?.message ?? 'Invalid input.'

@@ -143,6 +143,8 @@ export type Settings = {
   /** Multiplies car travel times from OSRM to approximate a two-wheeler. */
   speedFactor: number
   bufferMin: number
+  /** Rupees per planned road kilometre, used for travel-allowance reports. */
+  travelAllowancePerKm: number
   penaltyHigh: number
   penaltyMedium: number
   penaltyLow: number

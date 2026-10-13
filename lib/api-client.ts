@@ -63,6 +63,13 @@ export const resetUserPassword = (id: string, password: string) => post<{ ok: tr
 export const getSettings = () => request<Settings>('/api/settings')
 export const updateSettings = (input: SettingsInput) => request<Settings>('/api/settings', { method: 'PUT', body: JSON.stringify(input) })
 
+// ---------- Travel allowance approvals ----------
+export type ApprovalDto = { officerId: string; weekStart: string; approvedAt: string; approvedByName: string }
+export const getApprovals = (weekStart: string) => request<ApprovalDto[]>(`/api/allowance-approvals?weekStart=${weekStart}`)
+export const approveAllowance = (officerId: string, weekStart: string) => post<ApprovalDto>('/api/allowance-approvals', { officerId, weekStart })
+export const withdrawAllowance = (officerId: string, weekStart: string) =>
+  request<{ ok: true }>(`/api/allowance-approvals?officerId=${officerId}&weekStart=${weekStart}`, { method: 'DELETE' })
+
 // ---------- Villages ----------
 export type KnownVillage = { name: string; lat: number; lng: number }
 export const getVillages = () => request<KnownVillage[]>('/api/villages')

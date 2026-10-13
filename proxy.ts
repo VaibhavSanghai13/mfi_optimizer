@@ -14,20 +14,22 @@ import type { UserRole } from '@/lib/types'
 
 /** Reachable without signing in. */
 const PUBLIC_API = ['/api/auth/login', '/api/auth/logout']
+/** The marketing landing page, which carries its own sign-in form. Open to everyone, signed in or not. */
+const PUBLIC_PAGES = ['/']
 /** The Python optimizer verifies the JWT itself (S8). */
 const OPTIMIZER_API = '/api/optimize'
 /** The only API routes a Field Officer may call (the routes check ownership themselves). */
 const FIELD_OFFICER_API = ['/api/auth/me', '/api/plans/mine']
 const FIELD_OFFICER_DAY_SHEET = /^\/api\/plans\/[^/]+\/day-sheet\/[^/]+$/
 
-const home = (role: UserRole) => (role === 'field_officer' ? '/my-day' : '/')
+const home = (role: UserRole) => (role === 'field_officer' ? '/my-day' : '/planner')
 const matches = (path: string, prefix: string) => path === prefix || path.startsWith(`${prefix}/`)
 
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname
   const isApi = path.startsWith('/api/')
 
-  if (PUBLIC_API.includes(path) || matches(path, OPTIMIZER_API)) return NextResponse.next()
+  if (PUBLIC_API.includes(path) || PUBLIC_PAGES.includes(path) || matches(path, OPTIMIZER_API)) return NextResponse.next()
 
   const session = await verifySession(request.cookies.get(SESSION_COOKIE)?.value)
 
@@ -50,7 +52,7 @@ export async function proxy(request: NextRequest) {
   // Pages: each role has its own area.
   const onMyDay = matches(path, '/my-day')
   if (session.role === 'field_officer' && !onMyDay) return NextResponse.redirect(new URL('/my-day', request.url))
-  if (session.role === 'manager' && onMyDay) return NextResponse.redirect(new URL('/', request.url))
+  if (session.role === 'manager' && onMyDay) return NextResponse.redirect(new URL('/planner', request.url))
   return NextResponse.next()
 }
 
